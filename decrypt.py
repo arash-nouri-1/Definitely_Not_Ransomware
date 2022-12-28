@@ -1,0 +1,40 @@
+import Crypto
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+
+with open("key.txt", 'rb') as f:
+    g = f.read()
+
+with open("priv.key", "r") as file:
+    key_str = '''-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA02OG5QPMtu7dpi56eNhF2OMgBar8q7pm+//PvDsOFCWiFQnj
+jrj2RKqRvQeFNO2WYprp0dsvsjYd98PCNZMnDkQ01z2RzzCZ68vRMO7vRcPFWxdA
+I+XLklqH7uT8E+eOerRiaLf0RFaX64uKmMgenKa4iPsCTfrTp1HRIIOMeVHGFlhx
+5Ae5f/ckPkvfo5XTDMf51v2Ra82SkJ3jp1bXMblY40aWnN3CpwhlFZHtUzbuKW7t
+WBcJZjESFnkl1tCm7erVTh8RayOu7vi8plQkJ6SeE2Gzon5nMjh9M92u2YVf7BPb
+mAI5CQ+7M57H2rNY3G+GbLDbZksvRRXW6c84FQIDAQABAoIBAAElId7ttVcsVhEH
+YWx0J3S0TkEZmwLHILWuvg5T95COX6Fji1MDl3npvp5agxM1UkI4epnDaS+68VCd
+Q9kMcgK2xd6Am+CWb88CLKDqOmuTUudaaeOH5CFn0iKuJNtqvq/VeE7+6BjSq0IA
+YIDRXLEWihtb2LhZanoWjF5zt/gUQcw7YjN/YZaeoB+yL6K4lrGYeUAAxmxC47ma
+kef8NbYMocs6EKQau65C/S/hRI1+8t/FJAwWIsfI8V+tr7LNjqZg5pkqAPSm3Cxw
+9ogSVZFLUdsdf9DppVZ4Sxp2K4+5rG2YEu3Y3+YHiGMMGBcXS4TUpK0+ar8ZbNOA
+JFuWDCECgYEA5pnd5ChUXr0Jx2hyNtGfuKswJb5Mv6dCcSQY7SUto77dwsfarZt7
+4Fi9nAaNEgX5Q8kWSjaSkyXRdHUHgBzR0CI5i3wEvjWYsuYjRqKUslozknH9gXB8
+0bzjb5TPNwkdzmv3CE5oqM34cj+Dfv6cnGSyyfE/AqEgt04OB69IXgkCgYEA6qvx
+OisOJ4+Sr4h3WNeRkTv5Sr0W6YnoKnFaxRJNee6k5M/OFCacc0GMzjN37Md4h/cN
+DPkAl3r7/F8OlMmtBm+2WlwgAfhhSPpQEnljZohLcEZF9VLYTIqCyru0T4Gh3nfR
+c289cUqlC/XsT/AAqaC5fGIjQD14Z27CrvlVTK0CgYAlJXIN98UngbIakiOb2was
+m77kxZPdZ5cXXKY7RTrl3rAgWUtLnflFeWYJxTBiT94IYlMZ31KbK4NjDBsKMxpF
+Oc4lPvQQo9eWMeZK0ZO8azVViNE6UaF5s8C7T7BVgD1x7AheKStIze0QklSfV2po
+8vut9hOdW9FGVeeCq2Sv6QKBgQC8Kx8Ea12wLxmJkr1QCZp5gEOGwFRM8v2serQz
+7VcefFLP/ijaU5ODf34uIWr5+4AUVe6rBkaJMF45oOcKOyR4Ur8/eTtZGRa4862d
+AqTHpGYJIvAZpFI4HaB+e0A7uFBZGG5kR0BXRWlOS+Uuu91sJqpUqERn0GJpXZDR
+yK+zCQKBgQDQEvVbYf5TqK3OOEsTCaHYPTTaHiVPY3t7u45ILKzZMx8iAOkJcF59
+76lZwc8lnu2d+difMFPGwpwYqXYoPN9144xWRMwzvjCgbrKj3b9UY/fQqvUmaPqk
+tv88v0CDu9DEzYjxGpASZn6rvIthPFsvNkudLr4kP3k+BYEGFYTLDw==
+-----END RSA PRIVATE KEY-----'''
+private_key = RSA.import_key(key_str)
+
+cipher = PKCS1_OAEP.new(private_key)
+decrypted_message = cipher.decrypt(g).decode('utf-8')
+print(decrypted_message)
